@@ -2,6 +2,7 @@ local remote = game:GetService("ReplicatedStorage").Remote;
 local player = game.Players.LocalPlayer;
 local funcName = "attempt_open_chest";
 getgenv().attemptOpenChest = nil;
+local PlayerTeleport = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/PlayerTeleport.lua')))();
 local AutoOpenChest = {};
 
 function AutoOpenChest.openChests()
@@ -14,7 +15,7 @@ function AutoOpenChest.openChests()
         if v.Name == chestName and v.Parent then
             getgenv().attemptOpenChest(v);
             wait(0.5);
-            getgenv().PlayerTeleport.teleportTo(v.Parent.ChestSpawn.CFrame);
+            PlayerTeleport.teleportTo(v.Parent.ChestSpawn.CFrame);
             wait(3);
         end
     end
