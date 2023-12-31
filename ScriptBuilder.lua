@@ -156,7 +156,6 @@ function startRaid(name, difficulty)
     workspace.Worlds:WaitForChild("Raids");
     while not next(workspace.Worlds.Raids.Enemies:GetChildren()) do
         wait(1);
-        continue;
     end
     getgenv().isLoading = false;
     
@@ -190,7 +189,7 @@ function raidEnd()
     getgenv().ongoingRaid = false;
     getgenv().isLoading = false;
     if getgenv().isRunning then
-        -- startRaid(raidName,raidDifficulty);
+        startRaid(raidName,raidDifficulty);
     end
 end
 -- *********************** END RAID ***********************
