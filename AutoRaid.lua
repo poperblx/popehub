@@ -4,6 +4,23 @@ local AutoFindEnemy = loadstring(game:HttpGet(('https://raw.githubusercontent.co
 local PlayerTeleport = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/PlayerTeleport.lua')))();
 local AutoRaid = {};
 
+function AutoRaid.raidEnd()
+    print("ending raid...")
+    getgenv().isLoading = true;
+    remote.Player.Teleport:FireServer("Hub")
+    waitForWorldToLoad("Hub");
+    player.PlayerGui.RaidCompleteGui.Enabled = false;
+    getgenv().currentPlayerPos = CFrame.new(0,0,0);
+    getgenv().ongoingRaid = false;
+    getgenv().isLoading = false;
+
+    waitForRaidTimer();
+
+    if getgenv().isRunning then
+        startRaid(raidName,raidDifficulty);
+    end
+end
+
 function AutoRaid.startRaid(name, difficulty)
     print("starting new raid...")
     getgenv().isLoading = true;
@@ -70,22 +87,6 @@ function AutoRaid.startRaid(name, difficulty)
     
     while getgenv().ongoingRaid do
         AutoFindEnemy.findEnemies(AutoRaid.raidEnd);
-    end
-end
-
-function AutoRaid.raidEnd()
-    getgenv().isLoading = true;
-    remote.Player.Teleport:FireServer("Hub")
-    waitForWorldToLoad("Hub");
-    player.PlayerGui.RaidCompleteGui.Enabled = false;
-    getgenv().currentPlayerPos = CFrame.new(0,0,0);
-    getgenv().ongoingRaid = false;
-    getgenv().isLoading = false;
-
-    waitForRaidTimer();
-
-    if getgenv().isRunning then
-        startRaid(raidName,raidDifficulty);
     end
 end
 

@@ -17,4 +17,4 @@ local AutoRaid = loadstring(game:HttpGet(('https://raw.githubusercontent.com/pop
 print("initializing pope hub...")
 AutoOpenChest.init();
 print("starting pope hub...")
-AutoRaid.startRaid("ChristmasRaid","Medium");
+AutoRaid.startRaid(getgenv().raidName,getgenv().raidDifficulty);
