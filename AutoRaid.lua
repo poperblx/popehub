@@ -86,7 +86,7 @@ function AutoRaid.startRaid(name, difficulty)
     getgenv().isLoading = false;
     
     while getgenv().ongoingRaid do
-        AutoFindEnemy.findEnemies(AutoRaid.raidEnd);
+        AutoFindEnemy.findEnemies();
     end
 end
 
