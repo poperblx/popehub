@@ -15,8 +15,7 @@ function AutoRaid.raidEnd()
     getgenv().currentPlayerPos = CFrame.new(0,0,0);
     getgenv().ongoingRaid = false;
     getgenv().isLoading = false;
-    wait(120);
-    -- waitForRaidTimer();
+    waitForRaidTimer();
 
     if getgenv().isRunning then
         startRaid(raidName,raidDifficulty);
@@ -131,6 +130,7 @@ function waitForRaidTimer()
     while not isRaidAvailable do
         if player.PlayerGui.MainGui.Windows.RaidLobby.Main.Players.QuestTitleHeader.Timer.Text == "0:00" then
             isRaidAvailable = true;
+            wait(2);
             break;
         end
         wait(1);
