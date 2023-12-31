@@ -1,1 +1,202 @@
-local a=game:GetService("ReplicatedStorage").Remote;local b=game.Players.LocalPlayer;local c="ChristmasRaid"local d="Easy"local e=CFrame.new(-2071,136,-3073)local f=2;local g="attempt_open_chest"local h;getgenv().isRunning=true;getgenv().ongoingRaid=false;getgenv().currentPlayerPos=CFrame.new(0,0,0)getgenv().isLoading=false;getgenv().currentEnemyCount=0;getgenv().newEnemyCount=0;function getCurrentPlayerPos()if b.Character then return b.Character.HumanoidRootPart.Position end;return false end;function teleportTo(i)if b.Character then b.Character:WaitForChild("HumanoidRootPart")b.Character.HumanoidRootPart.CFrame=i end end;function findEnemies()if not getgenv().ongoingRaid then return nil end;local j=workspace.Worlds[b.World.Value].Enemies:GetChildren()print("finding enemies...")if not next(j)then openChests()raidEnd()else for k,l in pairs(j)do if l then l:WaitForChild("HumanoidRootPart")teleportTo(l.HumanoidRootPart.CFrame*CFrame.new(0,10,0))end;j=workspace.Worlds[b.World.Value].Enemies:GetChildren()end end;wait(f)end;function respawnPets()for k,m in pairs(b.Pets:GetChildren())do key=tostring(k)a.Data.SetEquipSlot:FireServer(key)wait()a.Data.SetEquipSlot:FireServer(key,m.Value)wait()end end;function openChests()if not getgenv().ongoingRaid then return nil end;local n=getChestName()print(n,type(n))print(b.WorldInstanceId.Value,type(b.WorldInstanceId.Value))for o,p in pairs(workspace.Worlds.Raids[b.WorldInstanceId.Value]:GetDescendants())do if p.Name==n and p.Parent then h(p)wait(0.5)teleportTo(p.Parent.ChestSpawn.CFrame)wait(3)end end end;function getChestName()if c=="ChristmasRaid"then return"ChristmasChest"end;return"RaidChest"end;function startRaid(q,r)print("starting new raid...")getgenv().isLoading=true;getgenv().ongoingRaid=true;local s=getAvailableRaidRoom()teleportTo(s.CFrame)local t={[1]=s,[2]=true}a.Raid.SetInRaid:FireServer(unpack(t))t={[1]=s,[2]="HoverWorld",[3]=q}a.Raid.SetRaidSetting:FireServer(unpack(t))t={[1]=s,[2]="TargetWorld",[3]=q}a.Raid.SetRaidSetting:FireServer(unpack(t))t={[1]=s,[2]="HoverWorld",[3]="None"}a.Raid.SetRaidSetting:FireServer(unpack(t))t={[1]=s,[2]="Difficulty",[3]=r}a.Raid.SetRaidSetting:FireServer(unpack(t))t={[1]=s}a.Raid.StartRaidFromRoom:FireServer(unpack(t))workspace.Worlds:WaitForChild("Raids")while not next(workspace.Worlds.Raids.Enemies:GetChildren())do wait(1)end;getgenv().isLoading=false;while getgenv().ongoingRaid do findEnemies()wait(f)end end;function getAvailableRaidRoom()local s=nil;while s==nil do for k,u in pairs(workspace.Worlds.Hub.DungeonTemple:FindFirstChild("1").RaidRooms:GetChildren())do if u.Owner.Value==nil then s=u;break end end end;return s end;function raidEnd()getgenv().isLoading=true;a.Player.Teleport:FireServer("Hub")wait(120)b.PlayerGui.RaidCompleteGui.Enabled=false;getgenv().currentPlayerPos=CFrame.new(0,0,0)getgenv().ongoingRaid=false;getgenv().isLoading=false;if getgenv().isRunning then startRaid(c,d)end end;for o,p in pairs(getgc())do if type(p)=='function'and getinfo(p).name and getinfo(p).name==g then h=p;break end end;startRaid(c,d)
+local remote = game:GetService("ReplicatedStorage").Remote;
+local player = game.Players.LocalPlayer;
+getgenv().raidName = "ChristmasRaid";
+local raidDifficulty = "Easy";
+local raidCoordinates = CFrame.new(-2071, 136, -3073);
+local intervalBetweenEnemies = 2;
+local funcName = "attempt_open_chest";
+local attemptOpenChest;
+getgenv().isRunning = true;
+getgenv().ongoingRaid = false;
+getgenv().currentPlayerPos = CFrame.new(0,0,0);
+getgenv().isLoading = false;
+getgenv().currentEnemyCount = 0;
+getgenv().newEnemyCount = 0;
+
+local AutoOpenChest = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoOpenChest.lua')))();
+
+-- *********************** TELEPORT PLAYER ***********************
+function getCurrentPlayerPos()
+    if player.Character then
+        return player.Character.HumanoidRootPart.Position;
+    end
+    return false;
+end
+
+function teleportTo(placeCFrame)
+    if player.Character then
+        player.Character:WaitForChild("HumanoidRootPart");
+        player.Character.HumanoidRootPart.CFrame = placeCFrame;
+    end
+end
+-- *********************** TELEPORT PLAYER ***********************
+-- *********************** FIND ENEMIES ***********************
+function findEnemies()
+    if not getgenv().ongoingRaid then
+        return nil;
+    end
+    local enemies = workspace.Worlds[player.World.Value].Enemies:GetChildren();
+    print("finding enemies...")
+    if not next(enemies) then
+        AutoOpenChest.openChests();
+        raidEnd()
+    else
+        for index,enemy in pairs(enemies) do
+            if enemy then
+                enemy:WaitForChild("HumanoidRootPart");
+                teleportTo(enemy.HumanoidRootPart.CFrame * CFrame.new(0,10,0));
+                -- respawnPets();
+            end
+            enemies = workspace.Worlds[player.World.Value].Enemies:GetChildren();
+        end
+    end
+    wait(intervalBetweenEnemies);
+end
+-- *********************** FIND ENEMIES ***********************
+-- *********************** RESPAWN PETS ***********************
+function respawnPets()
+    for index,pet in pairs(player.Pets:GetChildren()) do
+        key = tostring(index)
+        remote.Data.SetEquipSlot:FireServer(key);
+        wait();
+        remote.Data.SetEquipSlot:FireServer(key,pet.Value);
+        wait();
+    end
+end
+-- *********************** RESPAWN PETS ***********************
+-- *********************** OPEN CHESTS ***********************
+function openChests()
+    if not getgenv().ongoingRaid then
+        return nil
+    end
+
+    local chestName = getChestName();
+    print(chestName, type(chestName))
+    print(player.WorldInstanceId.Value, type(player.WorldInstanceId.Value));
+    for i,v in pairs(workspace.Worlds.Raids[player.WorldInstanceId.Value]:GetDescendants()) do
+        if v.Name == chestName and v.Parent then
+            attemptOpenChest(v);
+            wait(0.5);
+            teleportTo(v.Parent.ChestSpawn.CFrame);
+            wait(3);
+        end
+    end
+end
+-- *********************** OPEN CHESTS ***********************
+-- *********************** GET CHEST NAME ***********************
+function getChestName()
+    if raidName == "ChristmasRaid" then
+        return "ChristmasChest";
+    end
+
+    return "RaidChest";
+end
+-- *********************** GET CHEST NAME ***********************
+-- *********************** START RAID ***********************
+function startRaid(name, difficulty)
+    -- if getgenv().ongoingRaid or getgenv().isLoading then
+    --     return nil
+    -- end
+
+    print("starting new raid...")
+    getgenv().isLoading = true;
+    getgenv().ongoingRaid = true;
+  
+    local availableRaidRoom = getAvailableRaidRoom();
+    teleportTo(availableRaidRoom.CFrame);
+    local args = {
+        [1] = availableRaidRoom,
+        [2] = true
+    }
+
+    remote.Raid.SetInRaid:FireServer(unpack(args))
+
+    args = {
+        [1] = availableRaidRoom,
+        [2] = "HoverWorld",
+        [3] = name
+    }
+
+    remote.Raid.SetRaidSetting:FireServer(unpack(args))
+
+    args = {
+        [1] = availableRaidRoom,
+        [2] = "TargetWorld",
+        [3] = name
+    }
+
+    remote.Raid.SetRaidSetting:FireServer(unpack(args))
+
+    args = {
+        [1] = availableRaidRoom,
+        [2] = "HoverWorld",
+        [3] = "None"
+    }
+
+    remote.Raid.SetRaidSetting:FireServer(unpack(args))
+
+    args = {
+        [1] = availableRaidRoom,
+        [2] = "Difficulty",
+        [3] = difficulty
+    }
+
+    remote.Raid.SetRaidSetting:FireServer(unpack(args))
+
+    args = {
+        [1] = availableRaidRoom
+    }
+
+    remote.Raid.StartRaidFromRoom:FireServer(unpack(args))
+
+    -- local args = {
+    --     [1] = availableRaidRoom,
+    --     [2] = false
+    -- }
+
+    -- remote.Raid.SetInRaid:FireServer(unpack(args))
+    workspace.Worlds:WaitForChild("Raids");
+    while not next(workspace.Worlds.Raids.Enemies:GetChildren()) do
+        wait(1);
+    end
+    getgenv().isLoading = false;
+    
+    while getgenv().ongoingRaid do
+        findEnemies();
+        wait(intervalBetweenEnemies);
+    end
+end
+-- *********************** START RAID ***********************
+-- *********************** GET AVAILABLE RAID ROOM ***********************
+function getAvailableRaidRoom()
+    local availableRaidRoom = nil;
+    while availableRaidRoom == nil do
+        for index,room in pairs(workspace.Worlds.Hub.DungeonTemple:FindFirstChild("1").RaidRooms:GetChildren()) do
+            if room.Owner.Value == nil then
+                availableRaidRoom = room;
+                break;
+            end
+        end
+    end
+
+    return availableRaidRoom;
+end
+-- *********************** END RAID ***********************
+function raidEnd()
+    getgenv().isLoading = true;
+    remote.Player.Teleport:FireServer("Hub")
+    wait(120);
+    player.PlayerGui.RaidCompleteGui.Enabled = false;
+    getgenv().currentPlayerPos = CFrame.new(0,0,0);
+    getgenv().ongoingRaid = false;
+    getgenv().isLoading = false;
+    if getgenv().isRunning then
+        startRaid(raidName,raidDifficulty);
+    end
+end
+-- *********************** END RAID ***********************
+
+AutoOpenChest.test();
+AutoOpenChest.init();
+
+startRaid(raidName,raidDifficulty);

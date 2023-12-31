@@ -1,6 +1,6 @@
 local remote = game:GetService("ReplicatedStorage").Remote;
 local player = game.Players.LocalPlayer;
-local raidName = "ChristmasRaid";
+getgenv().raidName = "ChristmasRaid";
 local raidDifficulty = "Easy";
 local raidCoordinates = CFrame.new(-2071, 136, -3073);
 local intervalBetweenEnemies = 2;
@@ -12,6 +12,8 @@ getgenv().currentPlayerPos = CFrame.new(0,0,0);
 getgenv().isLoading = false;
 getgenv().currentEnemyCount = 0;
 getgenv().newEnemyCount = 0;
+
+local AutoOpenChest = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoOpenChest.lua')))();
 
 -- *********************** TELEPORT PLAYER ***********************
 function getCurrentPlayerPos()
@@ -36,7 +38,7 @@ function findEnemies()
     local enemies = workspace.Worlds[player.World.Value].Enemies:GetChildren();
     print("finding enemies...")
     if not next(enemies) then
-        openChests()
+        AutoOpenChest.openChests();
         raidEnd()
     else
         for index,enemy in pairs(enemies) do
@@ -194,11 +196,7 @@ function raidEnd()
 end
 -- *********************** END RAID ***********************
 
-for i,v in pairs(getgc()) do
-    if type(v) == 'function' and getinfo(v).name and getinfo(v).name == funcName then
-        attemptOpenChest = v;
-        break;
-    end
-end
+AutoOpenChest.test();
+AutoOpenChest.init();
 
 startRaid(raidName,raidDifficulty);
