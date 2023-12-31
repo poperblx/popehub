@@ -1,6 +1,6 @@
 local remote = game:GetService("ReplicatedStorage").Remote
 local player = game.Players.LocalPlayer;
-local AutoFindEnemy = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoFindEnemy.lua')))();
+-- local AutoFindEnemy = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoFindEnemy.lua')))();
 local AutoRaid = {};
 
 function AutoRaid.startRaid(name, difficulty)
@@ -67,9 +67,9 @@ function AutoRaid.startRaid(name, difficulty)
     end
     getgenv().isLoading = false;
     
-    while getgenv().ongoingRaid do
-        AutoFindEnemy.findEnemies();
-    end
+    -- while getgenv().ongoingRaid do
+    --     AutoFindEnemy.findEnemies();
+    -- end
 end
 
 function AutoRaid.raidEnd()
