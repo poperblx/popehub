@@ -1,5 +1,6 @@
 local remote = game:GetService("ReplicatedStorage").Remote
 local player = game.Players.LocalPlayer;
+local AutoFindEnemy = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoFindEnemy.lua')))();
 local AutoRaid = {};
 
 function AutoRaid.startRaid(name, difficulty)
