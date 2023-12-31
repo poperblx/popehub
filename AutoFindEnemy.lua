@@ -10,7 +10,6 @@ function AutoFindEnemy.findEnemies()
         return nil;
     end
     local enemies = workspace.Worlds[player.World.Value].Enemies:GetChildren();
-    print("finding enemies...")
     if not next(enemies) then
         AutoOpenChest.openChests();
         raidEnd()
