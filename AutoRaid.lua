@@ -1,5 +1,6 @@
 local remote = game:GetService("ReplicatedStorage").Remote
 local player = game.Players.LocalPlayer;
+local intervalBetweenEnemies = 2;
 local AutoFindEnemy = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoFindEnemy.lua')))();
 local PlayerTeleport = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/PlayerTeleport.lua')))();
 local AutoOpenChest = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoOpenChest.lua')))();
@@ -9,13 +10,14 @@ function AutoRaid.raidEnd()
     print("ending raid...")
     getgenv().isLoading = true;
     remote.Player.Teleport:FireServer("Hub")
-    waitForWorldToLoad("Hub");
+    wait(2);
+    -- waitForWorldToLoad("Hub");
     player.PlayerGui.RaidCompleteGui.Enabled = false;
     getgenv().currentPlayerPos = CFrame.new(0,0,0);
     getgenv().ongoingRaid = false;
     getgenv().isLoading = false;
-
-    waitForRaidTimer();
+    wait(120);
+    -- waitForRaidTimer();
 
     if getgenv().isRunning then
         startRaid(raidName,raidDifficulty);
