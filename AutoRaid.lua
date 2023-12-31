@@ -146,6 +146,7 @@ function waitForWorldToLoad(world)
         end
         wait(1);
     end
+    wait(2);
 end
 
 return AutoRaid

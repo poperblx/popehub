@@ -2,7 +2,7 @@ local remote = game:GetService("ReplicatedStorage").Remote;
 local player = game.Players.LocalPlayer;
 
 getgenv().raidName = "AotRaid";
-getgenv().raidDifficulty = "Hard";
+getgenv().raidDifficulty = "Medium";
 
 getgenv().isRunning = true;
 getgenv().ongoingRaid = false;
