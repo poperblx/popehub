@@ -1,7 +1,7 @@
 local remote = game:GetService("ReplicatedStorage").Remote;
 local player = game.Players.LocalPlayer;
 getgenv().raidName = "ChristmasRaid";
-getenv().raidDifficulty = "Medium";
+getgenv().raidDifficulty = "Medium";
 
 getgenv().isRunning = true;
 getgenv().ongoingRaid = false;
