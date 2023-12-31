@@ -1,23 +1,19 @@
 local remote = game:GetService("ReplicatedStorage").Remote;
 local player = game.Players.LocalPlayer;
+local PlayerTeleport = {};
 
--- *********************** TELEPORT PLAYER ***********************
-function getCurrentPlayerPos()
+function playerTeleport.getCurrentPlayerPos()
     if player.Character then
         return player.Character.HumanoidRootPart.Position;
     end
     return false;
 end
 
-print(getCurrentPlayerPos())
-
-local player = game.Players.LocalPlayer;
-
-function teleportTo(placeCFrame)
+function playerTeleport.teleportTo(placeCFrame)
     if player.Character then
+        player.Character:WaitForChild("HumanoidRootPart");
         player.Character.HumanoidRootPart.CFrame = placeCFrame;
     end
 end
 
-teleportTo(CFrame.new(-2154,143,-3074))
--- *********************** TELEPORT PLAYER ***********************
+return PlayerTeleport

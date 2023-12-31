@@ -1,8 +1,7 @@
 local remote = game:GetService("ReplicatedStorage").Remote;
 local player = game.Players.LocalPlayer;
-
--- *********************** RESPAWN PETS ***********************
-function respawnPets()
+local PetModule = {};
+function PetModule.respawnPets()
     for index,pet in pairs(player.Pets:GetChildren()) do
         key = tostring(index)
         remote.Data.SetEquipSlot:FireServer(key);
@@ -11,6 +10,5 @@ function respawnPets()
         wait();
     end
 end
--- *********************** RESPAWN PETS ***********************
 
-respawnPets();
+return PetModule;
