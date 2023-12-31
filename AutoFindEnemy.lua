@@ -1,9 +1,6 @@
 local remote = game:GetService("ReplicatedStorage").Remote;
 local player = game.Players.LocalPlayer;
 local intervalBetweenEnemies = 2;
-local AutoOpenChest = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoOpenChest.lua')))();
-local PlayerTeleport = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/PlayerTeleport.lua')))();
-local AutoRaid = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoRaid.lua')))();
 local AutoFindEnemy = {};
 
 function AutoFindEnemy.findEnemies()
@@ -12,13 +9,13 @@ function AutoFindEnemy.findEnemies()
     end
     local enemies = workspace.Worlds[player.World.Value].Enemies:GetChildren();
     if not next(enemies) then
-        AutoOpenChest.openChests();
-        AutoRaid.raidEnd()
+        getgenv().AutoOpenChest.openChests();
+        getgenv().AutoRaid.raidEnd()
     else
         for index,enemy in pairs(enemies) do
             if enemy then
                 enemy:WaitForChild("HumanoidRootPart");
-                PlayerTeleport.teleportTo(enemy.HumanoidRootPart.CFrame * CFrame.new(0,10,0));
+                getgenv().PlayerTeleport.teleportTo(enemy.HumanoidRootPart.CFrame * CFrame.new(0,10,0));
             end
             enemies = workspace.Worlds[player.World.Value].Enemies:GetChildren();
         end

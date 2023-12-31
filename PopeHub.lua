@@ -12,9 +12,11 @@ getgenv().currentEnemyCount = 0;
 getgenv().newEnemyCount = 0;
 getgenv().timeBeforeRaidAvailable = 120;
 
-local AutoOpenChest = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoOpenChest.lua')))();
-local AutoRaid = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoRaid.lua')))();
+getgenv().AutoOpenChest = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoOpenChest.lua')))();
+getgenv().AutoRaid = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoRaid.lua')))();
+getgenv().PlayerTeleport = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/PlayerTeleport.lua')))();
+getenv().AutoFindEnemy = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoFindEnemy.lua')))();
 print("initializing pope hub...")
-AutoOpenChest.init();
+getgenv().AutoOpenChest.init();
 print("starting pope hub...")
-AutoRaid.startRaid("ChristmasRaid","Medium");
+getgenv().AutoRaid.startRaid("ChristmasRaid","Medium");
