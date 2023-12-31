@@ -1,7 +1,7 @@
 local remote = game:GetService("ReplicatedStorage").Remote;
 local player = game.Players.LocalPlayer;
 local funcName = "attempt_open_chest";
-local func;
+getgenv().attemptOpenChest;
 local AutoOpenChest = {};
 
 function AutoOpenChest.openChests()
@@ -14,7 +14,7 @@ function AutoOpenChest.openChests()
     print(player.WorldInstanceId.Value, type(player.WorldInstanceId.Value));
     for i,v in pairs(workspace.Worlds.Raids[player.WorldInstanceId.Value]:GetDescendants()) do
         if v.Name == chestName and v.Parent then
-            attemptOpenChest(v);
+            getgenv().attemptOpenChest(v);
             wait(0.5);
             teleportTo(v.Parent.ChestSpawn.CFrame);
             wait(3);
@@ -33,7 +33,7 @@ end
 function AutoOpenChest.init()
     for i,v in pairs(getgc()) do
         if type(v) == 'function' and getinfo(v).name and getinfo(v).name == funcName then
-            attemptOpenChest = v;
+            getgenv().attemptOpenChest = v;
             break;
         end
     end
