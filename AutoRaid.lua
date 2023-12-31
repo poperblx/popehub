@@ -18,7 +18,7 @@ function AutoRaid.raidEnd()
     waitForRaidTimer();
 
     if getgenv().isRunning then
-        startRaid(raidName,raidDifficulty);
+        AutoRaid.startRaid(raidName,raidDifficulty);
     end
 end
 
