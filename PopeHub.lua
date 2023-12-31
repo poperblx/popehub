@@ -17,6 +17,7 @@ local PlayerTeleport = loadstring(game:HttpGet(('https://raw.githubusercontent.c
 local AutoFindEnemy = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoFindEnemy.lua')))();
 local AutoRaid = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoRaid.lua')))();
 
+print("initializing pope hub...")
 AutoOpenChest.init();
-
+print("starting pope hub...")
 AutoRaid.startRaid(getgenv().raidName,getenv().raidDifficulty);
