@@ -19,7 +19,6 @@ function AutoFindEnemy.findEnemies()
             if enemy then
                 enemy:WaitForChild("HumanoidRootPart");
                 PlayerTeleport.teleportTo(enemy.HumanoidRootPart.CFrame * CFrame.new(0,10,0));
-                -- respawnPets();
             end
             enemies = workspace.Worlds[player.World.Value].Enemies:GetChildren();
         end
