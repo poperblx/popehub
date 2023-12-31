@@ -10,8 +10,7 @@ function AutoRaid.raidEnd()
     print("ending raid...")
     getgenv().isLoading = true;
     remote.Player.Teleport:FireServer("Hub")
-    wait(2);
-    -- waitForWorldToLoad("Hub");
+    waitForWorldToLoad("Hub");
     player.PlayerGui.RaidCompleteGui.Enabled = false;
     getgenv().currentPlayerPos = CFrame.new(0,0,0);
     getgenv().ongoingRaid = false;
@@ -134,6 +133,7 @@ function waitForRaidTimer()
             isRaidAvailable = true;
             break;
         end
+        wait(1);
     end
 end
 
@@ -144,6 +144,7 @@ function waitForWorldToLoad(world)
             isWorldLoaded = true;
             break;
         end
+        wait(1);
     end
 end
 
