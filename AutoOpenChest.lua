@@ -31,6 +31,7 @@ function getChestName()
 end
 
 function AutoOpenChest.init()
+    print("initializing open chest function...")
     for i,v in pairs(getgc()) do
         if type(v) == 'function' and getinfo(v).name and getinfo(v).name == funcName then
             getgenv().attemptOpenChest = v;
@@ -39,10 +40,6 @@ function AutoOpenChest.init()
     end
 
     getChestName();
-end
-
-function AutoOpenChest.test()
-    print("this is a testing for module requirements")
 end
 
 return AutoOpenChest
