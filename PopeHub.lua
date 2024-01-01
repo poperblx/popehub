@@ -26,10 +26,6 @@ local raidNameMapping = {
     ["Marine's Fortress"] = "OnePiece2Raid"
 }
 
-for i,v in pairs(raidNameMapping) do
-    print(i,v);
-end
-
 local AutoOpenChest = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoOpenChest.lua')))();
 local AutoRaid = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoRaid.lua')))();
 print("initializing pope hub...")
@@ -78,10 +74,14 @@ local RaidStartToggle = RaidTab:CreateToggle({
    Flag = "startRaidToggle",
    Callback = function(Value)
     getgenv().startRaidToggledOn = Value;
+    if not Value then
+        return false;
+    end
     print("starting raid...", getgenv().raidName, getgenv().raidDifficulty)
     AutoRaid.startRaid(getgenv().raidName,getgenv().raidDifficulty);
    end,
 })
+RaidStartToggle:Set(false);
 
 local RaidEndButton = RaidTab:CreateButton({
     Name = "End Raid",
