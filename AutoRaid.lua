@@ -99,7 +99,6 @@ function findEnemies()
     local currentEnemyId = nil;
     print("finding enemies...")
     for index,enemy in pairs(workspace.Worlds[player.World.Value].Enemies:GetChildren()) do
-        enemy:WaitForChild("HumanoidRootPart");
         local newEnemyId = enemy:GetDebugId();
         print("Target: ", enemy.Name, newEnemyId)
         if currentEnemyId ~= newEnemyId then
