@@ -96,7 +96,7 @@ function AutoRaid.startRaid(name, difficulty)
 end
 
 function findEnemies()
-    local currentEnemyId = nil;
+    local currentEnemyId = 0;
     
     for index,enemy in pairs(workspace.Worlds[player.World.Value].Enemies:GetChildren()) do
         enemy:WaitForChild("HumanoidRootPart");
