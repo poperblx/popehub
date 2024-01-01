@@ -96,20 +96,14 @@ function AutoRaid.startRaid(name, difficulty)
 end
 
 function findEnemies()
-    if not getgenv().ongoingRaid then
-        return nil;
-    end
-
     local currentEnemyId = nil;
     
     for index,enemy in pairs(workspace.Worlds[player.World.Value].Enemies:GetChildren()) do
         enemy:WaitForChild("HumanoidRootPart");
-        -- local newEnemyId = enemy:GetDebugId();
-        -- if currentEnemyId != newEnemyId then
-        --     PlayerTeleport.teleportTo(enemy.HumanoidRootPart.CFrame * CFrame.new(0,10,0));
-        --     currentEnemyId = newEnemyId;
-        -- end
-        PlayerTeleport.teleportTo(enemy.HumanoidRootPart.CFrame * CFrame.new(0,10,0));
+        if currentEnemyId != enemy:GetDebugId() then
+            PlayerTeleport.teleportTo(enemy.HumanoidRootPart.CFrame * CFrame.new(0,10,0));
+            currentEnemyId = enemy:GetDebugId();
+        end
         wait(0.5);
     end
 end
