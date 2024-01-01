@@ -98,27 +98,42 @@ function AutoRaid.startRaid(name, difficulty)
 end
 
 function findEnemies()
-    local enemies = workspace.Worlds[player.World.Value].Enemies:GetChildren();
-    if not next(enemies) then
-        return nil;
-    end
+    -- local enemies = workspace.Worlds[player.World.Value].Enemies:GetChildren();
+    -- if not next(enemies) then
+    --     return nil;
+    -- end
 
-    if currentEnemy == nil then
-        currentEnemy = enemies[1];
-        return nil;
-    end
+    -- if currentEnemy == nil then
+    --     currentEnemy = enemies[1];
+    --     return nil;
+    -- end
 
-    local newEnemy = enemies[1];
+    -- local newEnemy = enemies[1];
 
-    if not newEnemy:FindFirstChild("HumanoidRootPart") then
-        return nil;
-    end
+    -- if not newEnemy:FindFirstChild("HumanoidRootPart") then
+    --     return nil;
+    -- end
 
-    if currentEnemy:GetDebugId() ~= newEnemy:GetDebugId() then
-        PlayerTeleport.teleportTo(newEnemy.HumanoidRootPart.CFrame * CFrame.new(0,10,0));
-        currentEnemy = newEnemy;
+    -- if currentEnemy:GetDebugId() ~= newEnemy:GetDebugId() then
+    --     PlayerTeleport.teleportTo(newEnemy.HumanoidRootPart.CFrame * CFrame.new(0,10,0));
+    --     currentEnemy = newEnemy;
+    -- end
+    -- wait();
+    local currentEnemyId = nil;
+    print("finding enemies...")
+    local enemies = workspace.Worlds[player.World.Value].Enemies:GetChildren()
+    for index,enemy in pairs(enemies) do
+        if enemy:FindFirstChild("HumanoidRootPart") then
+            local newEnemyId = enemy:GetDebugId();
+            print("Target: ", enemy.Name, newEnemyId)
+            if currentEnemyId ~= newEnemyId then
+                PlayerTeleport.teleportTo(enemy.HumanoidRootPart.CFrame * CFrame.new(0,10,0));
+                currentEnemyId = newEnemyId;
+            end
+        end
+        wait(2);
+        enemies = workspace.Worlds[player.World.Value].Enemies:GetChildren();
     end
-    wait();
 end
 
 function getAvailableRaidRoom()
