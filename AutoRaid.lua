@@ -97,11 +97,11 @@ function findEnemies()
 
     local enemies = workspace.Worlds[player.World.Value].Enemies:GetChildren();
     local currentEnemyId = nil;
-    if workspace.Worlds[player.World.Value].Hidden:FindFirstChild("ExitRaidTeleporter") then
-        AutoOpenChest.openChests();
-        AutoRaid.raidEnd();
-        return nil;
-    end
+    -- if workspace.Worlds[player.World.Value].Hidden:FindFirstChild("ExitRaidTeleporter") then
+    --     AutoOpenChest.openChests();
+    --     AutoRaid.raidEnd();
+    --     return nil;
+    -- end
 
     for index,enemy in pairs(enemies) do
         enemy:WaitForChild("HumanoidRootPart");
@@ -111,10 +111,6 @@ function findEnemies()
             currentEnemyId = newEnemyId;
         end
     end
-end
-
-for i,v in pairs(workspace.Worlds.Raids.Enemies:GetChildren()) do
-    print(v:GetDebugId())
 end
 
 function getAvailableRaidRoom()
