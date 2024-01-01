@@ -7,6 +7,9 @@ local AutoOpenChest = loadstring(game:HttpGet(('https://raw.githubusercontent.co
 local AutoRaid = {};
 
 function AutoRaid.raidEnd()
+    if not getgenv().ongoingRaid then
+        return false;
+    end
     print("ending raid...")
     remote.Player.Teleport:FireServer("Hub")
     waitForWorldToLoad("Hub");
