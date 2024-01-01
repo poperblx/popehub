@@ -14,7 +14,6 @@ function AutoRaid.raidEnd()
     waitForWorldToLoad("Hub");
     player.PlayerGui.RaidCompleteGui.Enabled = false;
     getgenv().ongoingRaid = false;
-    waitForRaidTimer();
 
     AutoRaid.startRaid(getgenv().raidName,getgenv().raidDifficulty);
 end
@@ -23,6 +22,9 @@ function AutoRaid.startRaid(name, difficulty)
     if not getgenv().startRaidToggledOn then
         return false;
     end
+
+    waitForRaidTimer();
+
     print("starting new raid...")
     getgenv().ongoingRaid = true;
   
@@ -96,8 +98,6 @@ function AutoRaid.startRaid(name, difficulty)
 end
 
 function findEnemies()
-    local currentEnemyId = nil;
-    print("finding enemies...")
     local enemies = workspace.Worlds[player.World.Value].Enemies:GetChildren();
     if not next(enemies) then
         return nil;
@@ -110,8 +110,12 @@ function findEnemies()
 
     local newEnemy = enemies[1];
 
+    if not newEnemy:FindFirstChild("HumanoidRootPart") then
+        return nil;
+    end
+
     if currentEnemy:GetDebugId() ~= newEnemy:GetDebugId() then
-        PlayerTeleport.teleportTo(enemy.HumanoidRootPart.CFrame * CFrame.new(0,10,0));
+        PlayerTeleport.teleportTo(newEnemy.HumanoidRootPart.CFrame * CFrame.new(0,10,0));
         currentEnemy = newEnemy;
     end
     wait();
