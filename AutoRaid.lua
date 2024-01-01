@@ -99,14 +99,14 @@ function findEnemies()
     local currentEnemyId = nil;
     print("finding enemies...")
     for index,enemy in pairs(workspace.Worlds[player.World.Value].Enemies:GetChildren()) do
-        if not enemy:FindFirstChild("HumanoidRootPart") then goto continue end
-        local newEnemyId = enemy:GetDebugId();
-        print("Target: ", enemy.Name, newEnemyId)
-        if currentEnemyId ~= newEnemyId then
-            PlayerTeleport.teleportTo(enemy.HumanoidRootPart.CFrame * CFrame.new(0,10,0));
-            currentEnemyId = newEnemyId;
+        if enemy:FindFirstChild("HumanoidRootPart") then
+            local newEnemyId = enemy:GetDebugId();
+            print("Target: ", enemy.Name, newEnemyId)
+            if currentEnemyId ~= newEnemyId then
+                PlayerTeleport.teleportTo(enemy.HumanoidRootPart.CFrame * CFrame.new(0,10,0));
+                currentEnemyId = newEnemyId;
+            end
         end
-        ::continue::
         wait(0.5);
     end
 end
