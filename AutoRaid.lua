@@ -100,7 +100,7 @@ function findEnemies()
     
     for index,enemy in pairs(workspace.Worlds[player.World.Value].Enemies:GetChildren()) do
         enemy:WaitForChild("HumanoidRootPart");
-        if currentEnemyId != enemy:GetDebugId() then
+        if enemy:GetDebugId() != currentEnemyId then
             PlayerTeleport.teleportTo(enemy.HumanoidRootPart.CFrame * CFrame.new(0,10,0));
             currentEnemyId = enemy:GetDebugId();
         end
