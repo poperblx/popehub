@@ -104,11 +104,13 @@ function findEnemies()
 
     for index,enemy in pairs(enemies) do
         enemy:WaitForChild("HumanoidRootPart");
-        local newEnemyId = enemy:GetDebugId();
-        if currentEnemyId != newEnemyId then
-            PlayerTeleport.teleportTo(enemy.HumanoidRootPart.CFrame * CFrame.new(0,10,0));
-            currentEnemyId = newEnemyId;
-        end
+        -- local newEnemyId = enemy:GetDebugId();
+        -- if currentEnemyId != newEnemyId then
+        --     PlayerTeleport.teleportTo(enemy.HumanoidRootPart.CFrame * CFrame.new(0,10,0));
+        --     currentEnemyId = newEnemyId;
+        -- end
+        PlayerTeleport.teleportTo(enemy.HumanoidRootPart.CFrame * CFrame.new(0,10,0));
+        wait(intervalBetweenEnemies);
     end
 end
 
