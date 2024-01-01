@@ -8,23 +8,19 @@ local AutoRaid = {};
 
 function AutoRaid.raidEnd()
     print("ending raid...")
-    getgenv().isLoading = true;
     remote.Player.Teleport:FireServer("Hub")
     waitForWorldToLoad("Hub");
     player.PlayerGui.RaidCompleteGui.Enabled = false;
-    getgenv().currentPlayerPos = CFrame.new(0,0,0);
     getgenv().ongoingRaid = false;
-    getgenv().isLoading = false;
     waitForRaidTimer();
 
-    if getgenv().isRunning then
-        AutoRaid.startRaid(raidName,raidDifficulty);
+    if getgenv().startRaidToggledOn then
+        AutoRaid.startRaid(getgenv().raidName,getgenv().raidDifficulty);
     end
 end
 
 function AutoRaid.startRaid(name, difficulty)
     print("starting new raid...")
-    getgenv().isLoading = true;
     getgenv().ongoingRaid = true;
   
     local availableRaidRoom = getAvailableRaidRoom();
@@ -84,7 +80,6 @@ function AutoRaid.startRaid(name, difficulty)
     while not next(workspace.Worlds.Raids.Enemies:GetChildren()) do
         wait(1);
     end
-    getgenv().isLoading = false;
     
     while getgenv().ongoingRaid do
         findEnemies();
