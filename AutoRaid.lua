@@ -98,7 +98,8 @@ end
 function findEnemies()
     local currentEnemyId = nil;
     print("finding enemies...")
-    for index,enemy in pairs(workspace.Worlds[player.World.Value].Enemies:GetChildren()) do
+    local enemies = workspace.Worlds[player.World.Value].Enemies:GetChildren()
+    for index,enemy in pairs(enemies) do
         if enemy:FindFirstChild("HumanoidRootPart") then
             local newEnemyId = enemy:GetDebugId();
             print("Target: ", enemy.Name, newEnemyId)
@@ -108,6 +109,7 @@ function findEnemies()
             end
         end
         wait(0.5);
+        enemies = workspace.Worlds[player.World.Value].Enemies:GetChildren();
     end
 end
 
