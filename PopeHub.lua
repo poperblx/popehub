@@ -1,8 +1,8 @@
 local remote = game:GetService("ReplicatedStorage").Remote;
 local player = game.Players.LocalPlayer;
 
-getgenv().raidName = "";
-getgenv().raidDifficulty = "";
+getgenv().raidName = "Holiday Raid";
+getgenv().raidDifficulty = "Easy";
 
 getgenv().isRunning = true;
 getgenv().startRaidToggledOn = false;
@@ -44,7 +44,7 @@ local Window = Rayfield:CreateWindow({
     LoadingTitle = "Loading Pope Hub",
     LoadingSubtitle = "by Pope",
     ConfigurationSaving = {
-       Enabled = true,
+       Enabled = false,
        FolderName = popehub,
        FileName = "Pope Hub"
     },
@@ -81,7 +81,6 @@ local RaidStartToggle = RaidTab:CreateToggle({
     AutoRaid.startRaid(getgenv().raidName,getgenv().raidDifficulty);
    end,
 })
-RaidStartToggle:Set(false);
 
 local RaidEndButton = RaidTab:CreateButton({
     Name = "End Raid",

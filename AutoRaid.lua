@@ -85,7 +85,7 @@ function AutoRaid.startRaid(name, difficulty)
     end
     
     while getgenv().ongoingRaid do
-        if workspace.Worlds[player.World.Value].Hidden:FindFirstChild("ExitRaidTeleporter") then
+        if workspace.Worlds[player.World.Value]:FindFirstChild(player.WorldInstanceId.Value).Hidden:FindFirstChild("ExitRaidTeleporter") then
             AutoOpenChest.openChests();
             AutoRaid.raidEnd();
             break;
