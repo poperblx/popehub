@@ -290,6 +290,7 @@ local RaidStartToggle = RaidTab:CreateToggle({
    CurrentValue = false,
    Flag = "startRaidToggle",
    Callback = function(Value)
+    print("raidStartToggle", Value);
     getgenv().startRaidToggledOn = Value;
     if not Value then
         return false;
