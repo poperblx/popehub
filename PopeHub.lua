@@ -295,6 +295,8 @@ local RaidStartToggle = RaidTab:CreateToggle({
     if not Value then
         return false;
     end
+
+    print("raidStartToggle", getgenv().startRaidToggledOn)
     startRaid(getgenv().raidName,getgenv().raidDifficulty);
    end,
 })
