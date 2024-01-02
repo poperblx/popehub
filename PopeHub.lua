@@ -56,62 +56,9 @@ local Window = Rayfield:CreateWindow({
     }
  })
 
-print("initializing pope hub...")
-init();
-print("starting pope hub...")
-
 if game.PlaceId == 14433762945 then
    print("Anime Champions Simulator detected...")
 end
-
-local RaidTab = Window:CreateTab("Raids", nil)
-local RaidSection = RaidTab:CreateSection("Raid Settings")
-
-local RaidStartToggle = RaidTab:CreateToggle({
-   Name = "Start Raid",
-   CurrentValue = false,
-   Flag = "startRaidToggle",
-   Callback = function(Value)
-    getgenv().startRaidToggledOn = Value;
-    if not Value then
-        return false;
-    end
-    startRaid(getgenv().raidName,getgenv().raidDifficulty);
-   end,
-})
-
-local RaidEndButton = RaidTab:CreateButton({
-    Name = "End Raid",
-    Interact = 'Click',
-    Callback = function()
-        RaidStartToggle:Set(false);
-        getgenv().startRaidToggledOn = false;
-        raidEnd();
-    end,
- })
-
-local RaidNameDropdown = RaidTab:CreateDropdown({
-   Name = "Worlds",
-   Options = {"Holiday Raid","Green Planet","Pirate Town","Hero Academy","Ninja Village","Bizarre Bazaar","Demon Forest",
-   "Cursed City","Spirit Town","Land of Ants","Sawblade City","Land of Giants","Marine's Fortress"},
-   CurrentOption = {"Holiday Raid"},
-   MultipleOptions = false,
-   Flag = "raidNameDropdown",
-   Callback = function(Option)
-    getgenv().raidName = raidNameMapping[Option[1]];
-   end,
-})
-
-local RaidDifficultyDropdown = RaidTab:CreateDropdown({
-   Name = "Difficulty",
-   Options = {"Easy","Medium","Hard","Impossible","Nightmare"},
-   CurrentOption = {"Easy"},
-   MultipleOptions = false,
-   Flag = "raidDifficultyDropdown",
-   Callback = function(Option)
-    getgenv().raidDifficulty = Option[1];
-   end,
-})
 
 -- *********** PlayerTeleport.lua *****************
 function getCurrentPlayerPos()
@@ -335,3 +282,55 @@ function waitForWorldToLoad(world)
     wait(2);
 end
 -- *********** AutoRaid.lua *****************
+local RaidTab = Window:CreateTab("Raids", nil)
+local RaidSection = RaidTab:CreateSection("Raid Settings")
+
+local RaidStartToggle = RaidTab:CreateToggle({
+   Name = "Start Raid",
+   CurrentValue = false,
+   Flag = "startRaidToggle",
+   Callback = function(Value)
+    getgenv().startRaidToggledOn = Value;
+    if not Value then
+        return false;
+    end
+    startRaid(getgenv().raidName,getgenv().raidDifficulty);
+   end,
+})
+
+local RaidEndButton = RaidTab:CreateButton({
+    Name = "End Raid",
+    Interact = 'Click',
+    Callback = function()
+        RaidStartToggle:Set(false);
+        getgenv().startRaidToggledOn = false;
+        raidEnd();
+    end,
+ })
+
+local RaidNameDropdown = RaidTab:CreateDropdown({
+   Name = "Worlds",
+   Options = {"Holiday Raid","Green Planet","Pirate Town","Hero Academy","Ninja Village","Bizarre Bazaar","Demon Forest",
+   "Cursed City","Spirit Town","Land of Ants","Sawblade City","Land of Giants","Marine's Fortress"},
+   CurrentOption = {"Holiday Raid"},
+   MultipleOptions = false,
+   Flag = "raidNameDropdown",
+   Callback = function(Option)
+    getgenv().raidName = raidNameMapping[Option[1]];
+   end,
+})
+
+local RaidDifficultyDropdown = RaidTab:CreateDropdown({
+   Name = "Difficulty",
+   Options = {"Easy","Medium","Hard","Impossible","Nightmare"},
+   CurrentOption = {"Easy"},
+   MultipleOptions = false,
+   Flag = "raidDifficultyDropdown",
+   Callback = function(Option)
+    getgenv().raidDifficulty = Option[1];
+   end,
+})
+
+print("initializing pope hub...")
+init();
+print("starting pope hub...")
