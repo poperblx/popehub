@@ -25,7 +25,7 @@ function AutoRaid.startRaid(name, difficulty)
 
     waitForRaidTimer();
 
-    print("starting new raid...")
+    print("starting new raid...", name, difficulty)
     getgenv().ongoingRaid = true;
   
     local availableRaidRoom = getAvailableRaidRoom();

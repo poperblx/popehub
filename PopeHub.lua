@@ -1,6 +1,5 @@
 local player = game.Players.LocalPlayer;
 
-getgenv().branchName = "main";
 getgenv().raidName = "ChristmasRaid";
 getgenv().raidDifficulty = "Easy";
 
@@ -77,7 +76,6 @@ local RaidStartToggle = RaidTab:CreateToggle({
     if not Value then
         return false;
     end
-    print("starting raid...", getgenv().raidName, getgenv().raidDifficulty)
     AutoRaid.startRaid(getgenv().raidName,getgenv().raidDifficulty);
    end,
 })
