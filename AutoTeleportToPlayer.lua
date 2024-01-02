@@ -1,4 +1,3 @@
-local remote = game:GetService("ReplicatedStorage").Remote;
 local player = game.Players.LocalPlayer;
 
 -- *********************** TELEPORT PLAYER ***********************

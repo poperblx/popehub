@@ -1,8 +1,8 @@
 local remote = game:GetService("ReplicatedStorage").Remote
 local player = game.Players.LocalPlayer;
 local currentEnemy = nil;
-local PlayerTeleport = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/PlayerTeleport.lua')))();
-local AutoOpenChest = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoOpenChest.lua')))();
+local PlayerTeleport = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/' ..getgenv().branchName.. '/PlayerTeleport.lua')))();
+local AutoOpenChest = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/' ..getgenv().branchName.. '/AutoOpenChest.lua')))();
 local AutoRaid = {};
 
 function AutoRaid.raidEnd()
