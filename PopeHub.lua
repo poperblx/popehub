@@ -26,8 +26,8 @@ local raidNameMapping = {
     ["Marine's Fortress"] = "OnePiece2Raid"
 }
 
-local AutoOpenChest = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/' ..getgenv().branchName.. '/AutoOpenChest.lua')))();
-local AutoRaid = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/' ..getgenv().branchName.. '/AutoRaid.lua')))();
+local AutoOpenChest = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoOpenChest.lua')))();
+local AutoRaid = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoRaid.lua')))();
 print("initializing pope hub...")
 AutoOpenChest.init();
 print("starting pope hub...")
