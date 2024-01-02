@@ -1,3 +1,4 @@
+local remote = game:GetService("ReplicatedStorage").Remote;
 local player = game.Players.LocalPlayer;
 local funcName = "attempt_open_chest";
 getgenv().attemptOpenChest = nil;
