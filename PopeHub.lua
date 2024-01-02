@@ -1,5 +1,8 @@
+require("AutoRaid.lua");
+require("AutoOpenChest.lua");
 local remote = game:GetService("ReplicatedStorage").Remote;
 local player = game.Players.LocalPlayer;
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 getgenv().raidName = "ChristmasRaid";
 getgenv().raidDifficulty = "Easy";
@@ -26,19 +29,6 @@ local raidNameMapping = {
     ["Marine's Fortress"] = "OnePiece2Raid"
 }
 
-local AutoOpenChest = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoOpenChest.lua')))();
-local AutoRaid = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoRaid.lua')))();
-print("initializing pope hub...")
-AutoOpenChest.init();
-print("starting pope hub...")
-
-
-local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
-
-if game.PlaceId == 14433762945 then
-   print("Anime Champions Simulator detected...")
-end
-
 local Window = Rayfield:CreateWindow({
     Name = "Pope Hub (Beta)",
     LoadingTitle = "Loading Pope Hub",
@@ -64,6 +54,14 @@ local Window = Rayfield:CreateWindow({
        Key = {"2Z9lgT6sBY"}
     }
  })
+
+print("initializing pope hub...")
+AutoOpenChest.init();
+print("starting pope hub...")
+
+if game.PlaceId == 14433762945 then
+   print("Anime Champions Simulator detected...")
+end
 
 local RaidTab = Window:CreateTab("Raids", nil)
 local RaidSection = RaidTab:CreateSection("Raid Settings")
