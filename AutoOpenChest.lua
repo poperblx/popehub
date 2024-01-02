@@ -1,7 +1,7 @@
 local player = game.Players.LocalPlayer;
 local funcName = "attempt_open_chest";
 getgenv().attemptOpenChest = nil;
-local PlayerTeleport = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/' ..getgenv().branchName.. '/PlayerTeleport.lua')))();
+local PlayerTeleport = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/PlayerTeleport.lua')))();
 local AutoOpenChest = {};
 
 function AutoOpenChest.openChests()
