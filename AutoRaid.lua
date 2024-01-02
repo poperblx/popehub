@@ -1,5 +1,6 @@
-require("PlayerTeleport.lua");
-require("AutoOpenChest.lua");
+local PlayerTeleport = require "PlayerTeleport";
+local AutoOpenChest = require "AutoOpenChest";
+
 local remote = game:GetService("ReplicatedStorage").Remote
 local player = game.Players.LocalPlayer;
 local currentEnemy = nil;

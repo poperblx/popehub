@@ -1,4 +1,5 @@
-require("PlayerTeleport.lua")
+local PlayerTeleport = require "PlayerTeleport";
+
 local remote = game:GetService("ReplicatedStorage").Remote;
 local player = game.Players.LocalPlayer;
 local funcName = "attempt_open_chest";

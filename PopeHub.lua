@@ -1,5 +1,6 @@
-require("AutoRaid.lua");
-require("AutoOpenChest.lua");
+local AutoRaid = require "AutoRaid";
+local AutoOpenChest = require "AutoOpenChest";
+
 local remote = game:GetService("ReplicatedStorage").Remote;
 local player = game.Players.LocalPlayer;
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
