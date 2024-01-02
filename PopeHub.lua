@@ -130,7 +130,7 @@ function startRaid(name, difficulty)
     if not getgenv().startRaidToggledOn then
         return false;
     end
-
+    print("checking for raid timer...")
     waitForRaidTimer();
 
     print("starting new raid...", name, difficulty)
