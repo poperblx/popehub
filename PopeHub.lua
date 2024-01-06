@@ -1,6 +1,8 @@
 local remote = game:GetService("ReplicatedStorage").Remote;
 local player = game.Players.LocalPlayer;
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local AutoOpenChest = loadstring(game:HttpGet('https://raw.githubusercontent.com/poperblx/popehub/main/AutoOpenChest.lua'))();
+-- local AutoRaid = loadstring(game:HttpGet('https://raw.githubusercontent.com/poperblx/popehub/main/AutoRaid.lua'))();
 local funcName = "attempt_open_chest";
 local currentEnemy = nil;
 getgenv().attemptOpenChest = nil;
@@ -30,9 +32,6 @@ local raidNameMapping = {
     ["Marine's Fortress"] = "OnePiece2Raid",
     ["Virtual Palace"] = "SAORaid"
 }
-
-local AutoOpenChest = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoOpenChest.lua')))();
-local AutoRaid = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoRaid.lua')))();
 
 local Window = Rayfield:CreateWindow({
     Name = "Pope Hub (Beta)",
@@ -77,8 +76,7 @@ local RaidStartToggle = RaidTab:CreateToggle({
         return false;
     end
 
-    print("raidStartToggle", getgenv().startRaidToggledOn)
-    AutoRaid.raidStart();
+    -- AutoRaid.raidStart();
    end,
 })
 
@@ -88,7 +86,7 @@ local RaidEndButton = RaidTab:CreateButton({
     Callback = function()
         RaidStartToggle:Set(false);
         getgenv().startRaidToggledOn = false;
-        AutoRaid.raidEnd();
+        -- AutoRaid.raidEnd();
     end,
  })
 
