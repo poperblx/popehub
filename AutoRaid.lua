@@ -1,6 +1,6 @@
-local PlayerTeleport = require "PlayerTeleport";
-local AutoOpenChest = require "AutoOpenChest";
-
+local PlayerTeleport = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/PlayerTeleport.lua')))();
+local AutoOpenChest = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoOpenChest.lua')))();
+local AutoFindEnemy = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoFindEnemy.lua')))();
 local remote = game:GetService("ReplicatedStorage").Remote
 local player = game.Players.LocalPlayer;
 local currentEnemy = nil;
@@ -94,46 +94,25 @@ function AutoRaid.startRaid(name, difficulty)
             break;
         end
 
-        findEnemies();
+        autoTeleportToZones();
     end
 end
 
-function findEnemies()
-    -- local enemies = workspace.Worlds[player.World.Value].Enemies:GetChildren();
-    -- if not next(enemies) then
-    --     return nil;
-    -- end
+function autoTeleportToZones()
+    for index, zone in pairs(workspace.Worlds[player.World.Value]:FindFirstChild(player.WorldInstanceId.Value):GetChildren()) do
+        if zone:FindFirstChild("EnemySpawners") then
+            AutoFindEnemy.findEnemies(zone.EnemySpawners:GetChildren())
+            wait(1)
+        end
 
-    -- if currentEnemy == nil then
-    --     currentEnemy = enemies[1];
-    --     return nil;
-    -- end
-
-    -- local newEnemy = enemies[1];
-
-    -- if not newEnemy:FindFirstChild("HumanoidRootPart") then
-    --     return nil;
-    -- end
-
-    -- if currentEnemy:GetDebugId() ~= newEnemy:GetDebugId() then
-    --     PlayerTeleport.teleportTo(newEnemy.HumanoidRootPart.CFrame * CFrame.new(0,10,0));
-    --     currentEnemy = newEnemy;
-    -- end
-    -- wait();
-    local currentEnemyId = nil;
-    print("finding enemies...")
-    local enemies = workspace.Worlds[player.World.Value].Enemies:GetChildren()
-    for index,enemy in pairs(enemies) do
-        if enemy:FindFirstChild("HumanoidRootPart") then
-            local newEnemyId = enemy:GetDebugId();
-            print("Target: ", enemy.Name, newEnemyId)
-            if currentEnemyId ~= newEnemyId then
-                PlayerTeleport.teleportTo(enemy.HumanoidRootPart.CFrame * CFrame.new(0,10,0));
-                currentEnemyId = newEnemyId;
+        if zone:FindFirstChild("ZoneCompleteModels") then
+            for i,part in pairs(zone.ZoneCompleteModels:GetDescendants()) then
+                if part:IsA("BasePart") and part.Name == "TeleportPart" then
+                    PlayerTeleport.teleportTo(part.CFrame)
+                    wait(2)
+                end
             end
         end
-        wait(2);
-        enemies = workspace.Worlds[player.World.Value].Enemies:GetChildren();
     end
 end
 
