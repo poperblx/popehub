@@ -16,15 +16,17 @@ function AutoRaid.raidEnd()
     player.PlayerGui.RaidCompleteGui.Enabled = false;
     getgenv().ongoingRaid = false;
 
-    AutoRaid.startRaid(getgenv().raidName,getgenv().raidDifficulty);
+    waitForRaidTimer();
+    AutoRaid.raidStart();
 end
 
-function AutoRaid.startRaid(name, difficulty)
+function AutoRaid.raidStart()
+    local name = getgenv().raidName;
+    local difficulty = getgenv().raidDifficulty;
     if not getgenv().startRaidToggledOn then
         return false;
     end
 
-    waitForRaidTimer();
 
     print("starting new raid...", name, difficulty)
     getgenv().ongoingRaid = true;
@@ -87,19 +89,22 @@ function AutoRaid.startRaid(name, difficulty)
         wait(1);
     end
     
+    local worldInstance = workspace.Worlds[player.World.Value]:FindFirstChild(player.WorldInstanceId.Value);
     while getgenv().ongoingRaid do
-        if workspace.Worlds[player.World.Value]:FindFirstChild(player.WorldInstanceId.Value).Hidden:FindFirstChild("ExitRaidTeleporter") then
-            AutoOpenChest.openChests();
+        if worldInstance.Hidden:FindFirstChild("ExitRaidTeleporter") then
+            AutoOpenChest.openChests(worldInstance);
             AutoRaid.raidEnd();
             break;
         end
 
-        autoTeleportToZones();
+        autoTeleportToZones(worldInstance);
     end
 end
 
-function autoTeleportToZones()
-    for index, zone in pairs(workspace.Worlds[player.World.Value]:FindFirstChild(player.WorldInstanceId.Value):GetChildren()) do
+function autoTeleportToZones(worldInstance)
+    for index, zone in pairs(worldInstance:GetChildren()) do
+        if worldInstance.ZonesCompleted:FindFirstChild(zone) then continue end
+
         if zone:FindFirstChild("EnemySpawners") then
             AutoFindEnemy.findEnemies(zone.EnemySpawners:GetChildren())
             wait(1)

@@ -78,7 +78,7 @@ local RaidStartToggle = RaidTab:CreateToggle({
     end
 
     print("raidStartToggle", getgenv().startRaidToggledOn)
-    AutoRaid.startRaid(getgenv().raidName,getgenv().raidDifficulty);
+    AutoRaid.raidStart();
    end,
 })
 
