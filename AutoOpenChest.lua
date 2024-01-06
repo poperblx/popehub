@@ -6,13 +6,13 @@ local funcName = "attempt_open_chest";
 getgenv().attemptOpenChest = nil;
 local AutoOpenChest = {};
 
-function AutoOpenChest.openChests(worldInstance)
+function AutoOpenChest.openChests()
     if not getgenv().ongoingRaid then
         return nil
     end
 
     local chestName = getChestName();
-    for i,v in pairs(worldInstance:GetDescendants()) do
+    for i,v in pairs(workspace.Worlds[player.World.Value]:FindFirstChild(player.WorldInstanceId.Value):GetDescendants()) do
         if v.Name == chestName and v.Parent then
             getgenv().attemptOpenChest(v);
             wait(0.5);
