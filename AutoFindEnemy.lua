@@ -3,12 +3,12 @@ local AutoFindEnemy = {}
 
 function AutoFindEnemy.findEnemies(spawners, enemies)
     for i, spawner in pairs(spawners) do
-        if spawnerHasEnemy(spawner.Position) then
+        if spawnerHasEnemy(spawner.Position, enemies) then
             PlayerTeleport.teleportTo(spawner.CFrame)
 
             repeat
                 wait()
-            until not spawnerHasEnemy(spawner.Position)
+            until not spawnerHasEnemy(spawner.Position, enemies)
         end
     end
 end
