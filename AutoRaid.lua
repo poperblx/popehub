@@ -139,7 +139,8 @@ end
 function waitForRaidTimer()
     local isRaidAvailable = false;
     while not isRaidAvailable do
-        if player.PlayerGui.MainGui.Windows.RaidLobby.Main.Players.QuestTitleHeader.Timer.Text == "0:00" then
+        local timer = player.PlayerGui.MainGui.Windows.RaidLobby.Main.Players.QuestTitleHeader.Timer.Text;
+        if timer == "0:00" or timer == "3:59" then
             isRaidAvailable = true;
             wait(2);
             break;
