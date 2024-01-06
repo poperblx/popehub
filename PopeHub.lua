@@ -1,8 +1,8 @@
 local remote = game:GetService("ReplicatedStorage").Remote;
 local player = game.Players.LocalPlayer;
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
-local AutoOpenChest = loadstring(game:HttpGet('https://raw.githubusercontent.com/poperblx/popehub/main/AutoOpenChest.lua'))();
-local AutoRaid = loadstring(game:HttpGet('https://raw.githubusercontent.com/poperblx/popehub/main/AutoRaid.lua'))();
+local AutoOpenChest = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoOpenChest.lua')))();
+local AutoRaid = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoRaid.lua')))();
 local funcName = "attempt_open_chest";
 local currentEnemy = nil;
 getgenv().attemptOpenChest = nil;
@@ -72,6 +72,7 @@ local RaidStartToggle = RaidTab:CreateToggle({
    Flag = "startRaidToggle",
    Callback = function(Value)
     getgenv().startRaidToggledOn = Value;
+    print("Start raid toggled ", getgenv().startRaidToggledOn)
     if not Value then
         return false;
     end
@@ -86,7 +87,7 @@ local RaidEndButton = RaidTab:CreateButton({
     Callback = function()
         RaidStartToggle:Set(false);
         getgenv().startRaidToggledOn = false;
-        -- AutoRaid.raidEnd();
+        AutoRaid.raidEnd();
     end,
  })
 
