@@ -90,20 +90,21 @@ function AutoRaid.raidStart()
         wait(1);
     end
     
+    local worldInstance = workspace.Worlds[player.World.Value]:FindFirstChild(player.WorldInstanceId.Value);
     while getgenv().ongoingRaid do
-        if workspace.Worlds[player.World.Value]:FindFirstChild(player.WorldInstanceId.Value).Hidden:FindFirstChild("ExitRaidTeleporter") then
-            AutoOpenChest.openChests();
+        if worldInstance.Hidden:FindFirstChild("ExitRaidTeleporter") then
+            AutoOpenChest.openChests(worldInstance);
             AutoRaid.raidEnd();
             break;
         end
 
-        autoTeleportToZones();
+        autoTeleportToZones(worldInstance);
     end
 end
 
-function autoTeleportToZones()
-    for index, zone in pairs(workspace.Worlds[player.World.Value]:FindFirstChild(player.WorldInstanceId.Value):GetChildren()) do
-        if workspace.Worlds[player.World.Value]:FindFirstChild(player.WorldInstanceId.Value).ZonesCompleted:FindFirstChild(zone) then continue end
+function autoTeleportToZones(worldInstance)
+    for index, zone in pairs(worldInstance:GetChildren()) do
+        if worldInstance.ZonesCompleted:FindFirstChild(zone) then continue end
 
         if zone:FindFirstChild("EnemySpawners") then
             AutoFindEnemy.findEnemies(zone.EnemySpawners:GetChildren())

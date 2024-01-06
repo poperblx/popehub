@@ -14,7 +14,7 @@ function AutoFindEnemy.findEnemies(spawners, enemies)
 end
 
 function spawnerHasEnemy(spawnerPos, enemies)
-    for i,enemy in pairs(workspace.Worlds[player.World.Value].Enemies:GetChildren()) do
+    for i,enemy in pairs(enemies) do
         local enemyPos = enemy.HumanoidRootPart.Position;
         if enemyPos.X == spawnerPos.X and enemyPos.Z == spawnerPos.Z then
             return true;
