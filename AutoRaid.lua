@@ -83,7 +83,9 @@ function AutoRaid.raidStart()
     -- }
 
     -- remote.Raid.SetInRaid:FireServer(unpack(args))
-    workspace.Worlds:WaitForChild("Raids");
+    print("loading world...Raids")
+    waitForWorldToLoad("Raids")
+    print(player.World.Value, " world loaded")
     while not next(workspace.Worlds.Raids.Enemies:GetChildren()) do
         wait(1);
     end
