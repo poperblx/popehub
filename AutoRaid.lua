@@ -1,6 +1,6 @@
-local PlayerTeleport = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/PlayerTeleport.lua')))();
-local AutoOpenChest = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoOpenChest.lua')))();
-local AutoFindEnemy = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoFindEnemy.lua')))();
+local PlayerTeleport = loadstring(game:HttpGet('https://raw.githubusercontent.com/poperblx/popehub/main/PlayerTeleport.lua'))();
+local AutoOpenChest = loadstring(game:HttpGet('https://raw.githubusercontent.com/poperblx/popehub/main/AutoOpenChest.lua'))();
+local AutoFindEnemy = loadstring(game:HttpGet('https://raw.githubusercontent.com/poperblx/popehub/main/AutoFindEnemy.lua'))();
 local remote = game:GetService("ReplicatedStorage").Remote
 local player = game.Players.LocalPlayer;
 local currentEnemy = nil;
@@ -111,7 +111,7 @@ function autoTeleportToZones(worldInstance)
         end
 
         if zone:FindFirstChild("ZoneCompleteModels") then
-            for i,part in pairs(zone.ZoneCompleteModels:GetDescendants()) then
+            for i,part in pairs(zone.ZoneCompleteModels:GetDescendants()) do
                 if part:IsA("BasePart") and part.Name == "TeleportPart" then
                     PlayerTeleport.teleportTo(part.CFrame)
                     wait(2)
