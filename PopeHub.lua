@@ -119,7 +119,16 @@ function init()
     print("initializing pope hub...")
     AutoOpenChest.init();
 
-    DiscordClient.notifyLogin(player.Name)
+    local data = {
+        ['WebhookURL'] = 'https://discord.com/api/webhooks/1193441300150755408/XFaBUtpjQwb64uc93kXLngwyDXvJ8lMSwq9phfx09F8Gtg8vdtQMdHQgsKI2EPLKcvSj'
+        ['WebhookData'] = {['username']=player.Name}
+    }
+    local https = game:GetService('HttpService')
+    local data = https:JSONEncode(data)
+    
+    local success,errorm = pcall(function()
+        https:PostAsync('https://bloxrank.net/api/webhook/', data, content_type=Enum.HttpContentType.ApplicationJson)
+    end)
 end
 
 
