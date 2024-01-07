@@ -3,7 +3,7 @@ local player = game.Players.LocalPlayer;
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local AutoOpenChest = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoOpenChest.lua')))();
 local AutoRaid = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoRaid.lua')))();
-local DiscordClient = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/DiscordClient.lua')))();
+-- local DiscordClient = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/DiscordClient.lua')))();
 local funcName = "attempt_open_chest";
 local currentEnemy = nil;
 getgenv().attemptOpenChest = nil;
@@ -131,5 +131,5 @@ function init()
     end)
 end
 
-
+init()
 print("starting pope hub...")
