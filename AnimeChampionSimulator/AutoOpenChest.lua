@@ -1,4 +1,4 @@
-local PlayerTeleport = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/AnimeChampionSimulator/main/PlayerTeleport.lua')))();
+local PlayerTeleport = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AnimeChampionSimulator/PlayerTeleport.lua')))();
 
 local remote = game:GetService("ReplicatedStorage").Remote;
 local player = game.Players.LocalPlayer;
