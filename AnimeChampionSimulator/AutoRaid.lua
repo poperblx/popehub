@@ -1,6 +1,6 @@
-local PlayerTeleport = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/PlayerTeleport.lua')))();
-local AutoOpenChest = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoOpenChest.lua')))();
-local AutoFindEnemy = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/main/AutoFindEnemy.lua')))();
+local PlayerTeleport = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/AnimeChampionSimulator/main/PlayerTeleport.lua')))();
+local AutoOpenChest = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/AnimeChampionSimulator/main/AutoOpenChest.lua')))();
+local AutoFindEnemy = loadstring(game:HttpGet(('https://raw.githubusercontent.com/poperblx/popehub/AnimeChampionSimulator/main/AutoFindEnemy.lua')))();
 local remote = game:GetService("ReplicatedStorage").Remote
 local player = game.Players.LocalPlayer;
 local AutoRaid = {};
@@ -105,10 +105,12 @@ end
 function autoTeleportToZones(worldInstance)
     for index, zone in pairs(worldInstance:GetChildren()) do
         if worldInstance.ZonesCompleted:FindFirstChild(zone) then continue end
+        print("teleporting to zone: ", zone)
 
         if zone:FindFirstChild("EnemySpawners") then
-            AutoFindEnemy.findEnemies(zone.EnemySpawners:GetChildren(), workspace.Worlds[player.World.Value].Enemies:GetChildren())
-            wait(1)
+            repeat
+                AutoFindEnemy.findEnemies(zone.EnemySpawners:GetChildren(), workspace.Worlds[player.World.Value].Enemies:GetChildren())
+            until workspace.Worlds[player.World.Value]:FindFirstChild(player.WorldInstanceId.Value).ZonesCompleted:FindFirstChild(zone)
         end
 
         if zone:FindFirstChild("ZoneCompleteModels") then
