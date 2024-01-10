@@ -102,6 +102,18 @@ function AutoRaid.raidStart()
     end
 end
 
+function waitForZoneCompleted(zone)
+    local completed = false;
+    while completed do
+        if workspace.Worlds[player.World.Value]:FindFirstChild(player.WorldInstanceId.Value).ZonesCompleted:FindFirstChild(zone) then
+            completed = true;
+            break;
+        end
+
+        wait(1);
+    end
+end
+
 function autoTeleportToZones(worldInstance)
     for index, zone in pairs(worldInstance:GetChildren()) do
         if worldInstance.ZonesCompleted:FindFirstChild(zone) then continue end
@@ -110,6 +122,7 @@ function autoTeleportToZones(worldInstance)
         if zone:FindFirstChild("EnemySpawners") then
             repeat
                 AutoFindEnemy.findEnemies(zone.EnemySpawners:GetChildren(), workspace.Worlds[player.World.Value].Enemies:GetChildren())
+                wait(1)
             until workspace.Worlds[player.World.Value]:FindFirstChild(player.WorldInstanceId.Value).ZonesCompleted:FindFirstChild(zone)
         end
 
