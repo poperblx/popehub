@@ -120,10 +120,11 @@ function autoTeleportToZones(worldInstance)
         print("teleporting to zone: ", zone)
 
         if zone:FindFirstChild("EnemySpawners") then
-            repeat
-                AutoFindEnemy.findEnemies(zone.EnemySpawners:GetChildren(), workspace.Worlds[player.World.Value].Enemies:GetChildren())
-                wait(1)
-            until workspace.Worlds[player.World.Value]:FindFirstChild(player.WorldInstanceId.Value).ZonesCompleted:FindFirstChild(zone)
+            while not next(zone.EnemySpawners:GetChildren()) do
+                wait();
+            end
+
+            AutoFindEnemy.findEnemies(zone.EnemySpawners:GetChildren(), workspace.Worlds[player.World.Value].Enemies:GetChildren())
         end
 
         if zone:FindFirstChild("ZoneCompleteModels") then
